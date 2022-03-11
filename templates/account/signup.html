@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+
+{% block title %}Sign Up{% endblock title %} 
+
+{% load static %} 
+{% load crispy_forms_tags %} 
+{% load socialaccount %} 
+
+
+{% block content %}
+
+<div class="hero_area">
+    <section class="layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto ">
+                    <div class="detail-box">
+                        <div class="heading_container mb-5">
+                        <h2>
+                            Sign Up!
+                        </h2>
+                        </div>
+                
+                        {% comment %} <form method="post">
+                            {% csrf_token %} 
+                            {{ form|crispy }}
+                            <input class="btn btn-success" type="submit" value="Sign Up">
+                        </form> 
+
+                        <img src="{% static 'images/Divider-css.png' %}" class="my-2" style="position:relative;"> {% endcomment %}
+
+                        <a class="btn btn-outline-danger mt-3 py-3" style="width:100%;" href="{% provider_login_url 'google' %}"><i class="fa-brands fa-google"></i>   Sign Up with Google + </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+{% endblock content %}
