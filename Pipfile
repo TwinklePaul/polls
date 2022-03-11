@@ -8,6 +8,8 @@ django = "*"
 django-allauth = "*"
 django-crispy-forms = "*"
 python-decouple = "*"
+crispy-bootstrap5 = "*"
+fontawesomefree = "*"
 
 [dev-packages]
 

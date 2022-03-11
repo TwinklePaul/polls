@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "73b05e01b4aa026c96d603bea6f784528e4a0d30be04eb349ab525a25545a742"
+            "sha256": "682df7bb0a90c97d58870a23d45b84350105611c156cb544abbd1ae00be3b7e6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -94,6 +94,14 @@
             "markers": "python_version >= '3'",
             "version": "==2.0.12"
         },
+        "crispy-bootstrap5": {
+            "hashes": [
+                "sha256:ca5d2afc2a5d1cf12b8d057886a81002cdf7793afcbe0ce006c2294069c1f387",
+                "sha256:e8c50daaf266d6127c7414f5669d5f2467b640d08b045ed9dd57e351d30609ae"
+            ],
+            "index": "pypi",
+            "version": "==0.6"
+        },
         "cryptography": {
             "hashes": [
                 "sha256:0a817b961b46894c5ca8a66b599c745b9a3d9f822725221f0e0fe49dc043a3a3",
@@ -149,6 +157,13 @@
             ],
             "index": "pypi",
             "version": "==1.14.0"
+        },
+        "fontawesomefree": {
+            "hashes": [
+                "sha256:a4407ff3147fbb23c9c06929eacec6a7f9c45decca42d7c1a006c96746cb7fc0"
+            ],
+            "index": "pypi",
+            "version": "==6.0.0"
         },
         "idna": {
             "hashes": [
