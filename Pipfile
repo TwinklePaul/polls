@@ -10,6 +10,8 @@ django-crispy-forms = "*"
 python-decouple = "*"
 crispy-bootstrap5 = "*"
 fontawesomefree = "*"
+pillow = "*"
+django-autocomplete-light = "*"
 
 [dev-packages]
 

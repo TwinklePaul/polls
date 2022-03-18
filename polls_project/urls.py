@@ -7,5 +7,6 @@ urlpatterns = [
 
     path("accounts/", include("allauth.urls")),
 
-    path("", include("pages.urls"))
+    path("", include("pages.urls")),
+    path("polls/", include("polls.urls")),
 ]

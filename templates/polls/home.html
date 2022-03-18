@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+    <link href="{% static 'css/list.css' %}" rel="stylesheet" type="text/css">
+{% endblock customcss %}
+
+{% block title %}Polls List{% endblock title %} 
+
+
+{% block content %}
+<section class="catagory_section layout_padding" style="min-height: 100vh;">
+    <div class="catagory_container">
+        <div class="container ">
+            <div class="heading_container heading_center">
+                <h2>
+                    All Polls
+                </h2>
+                <p>
+                    You are only allowed to vote once per poll, unless the poll has been altered.
+                </p>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-10 mx-auto">
+                    <div class="career-search mb-60">
+                        {% for poll, status in polls %}
+                        <div class="job-box d-md-flex align-items-center justify-content-between mb-30 px-5 shadow bg-body rounded">
+                            <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
+                                <div class="img-holder mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex">
+                                    VV
+                                </div>
+                                <div class="job-content">
+                                    <h5 class="text-md-left ms-5">{{ poll.title }}</h5>
+                                    {% comment %} <ul class="d-md-flex flex-wrap text-capitalize ff-open-sans">
+                                        <li class="me-md-4">
+                                            <i class="zmdi zmdi-pin ms-3 ps-1"></i> Los Angeles
+                                        </li>
+                                        <li class="me-md-4">
+                                            <i class="zmdi zmdi-money mr-2"></i> 2500-3500/pm
+                                        </li>
+                                        <li class="me-md-4">
+                                            <i class="zmdi zmdi-time mr-2"></i> Full Time
+                                        </li>
+                                    </ul> {% endcomment %}
+                                </div>
+                            </div>
+                            <div class="job-right my-4 flex-shrink-0">
+                                {% if status %}
+                                    <a href="{% url "poll" poll.pk %}" class="btn btn-primary btn-block w-100 ">Vote now</a>
+                                {% else %}
+                                    <a href="#" class="btn btn-secondary btn-block w-100 disabled">Voted</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
