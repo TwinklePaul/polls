@@ -16,7 +16,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'voltsverse-polls.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',
+                 '0.0.0.0', 'voltsverse-polls.herokuapp.com']
 
 # Application definition
 
