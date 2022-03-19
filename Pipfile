@@ -13,6 +13,8 @@ fontawesomefree = "*"
 pillow = "*"
 django-autocomplete-light = "*"
 psycopg2 = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 
