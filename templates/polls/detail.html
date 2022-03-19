@@ -26,7 +26,7 @@
                                 <input type="radio" class="form-check-input" name="choices" value={{choice.id}} id="id_choices_{{ forloop.counter }}" required=""> 
                                 <label for="id_choices_{{ forloop.counter }}" class="form-check-label"> 
                                     {% if choice.image_url %}
-                                        <img style="width:90%" src={{ choice.image_url }}/>
+                                        <img style="width:22rem; height:22rem;" src={{ choice.image_url }}/>
                                     {% elif choice.image_file %}
                                         <img style="width:22rem; height:22rem;" src={{ choice.image_file.url }}/>
                                     {% else %}
