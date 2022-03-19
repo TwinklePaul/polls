@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+import dj_database_url
 import os
 
 
@@ -16,8 +17,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',
-                 '0.0.0.0', 'voltsverse-polls.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -96,6 +96,10 @@ DATABASES = {
         'PORT': 5432
     }
 }
+
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
