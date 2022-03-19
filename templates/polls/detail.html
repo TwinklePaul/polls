@@ -14,15 +14,15 @@
                 </h2>
             </div>
             
-            <h3 class="text-start mt-5 ms-5 ps-4 mb-3"> {{ poll.poll }} </h3>
+            <h3 class="text-start mt-5 mx-5 ps-4 mb-3"> {{ poll.poll }} </h3>
                     
             <div class="p-5 pt-2 justify-content-center">
-                <form class="text-start ms-4" action="" method="POST"> 
+                <form class="text-start mx-2" action="" method="POST"> 
                         {% csrf_token %} 
                         {% comment %} {{ form|crispy }} {% endcomment %}
-                        <div class="row ms-5 p-3 ps-5 my-2 mx-auto">
+                        <div class="row m-3 p-3 my-2 mx-auto">
                         {% for choice in poll.choices %}
-                            <div class="col-6 form-check text-start p-3"> 
+                            <div class="col-lg-6 form-check text-start p-3"> 
                                 <input type="radio" class="form-check-input" name="choices" value={{choice.id}} id="id_choices_{{ forloop.counter }}" required=""> 
                                 <label for="id_choices_{{ forloop.counter }}" class="form-check-label"> 
                                     {% if choice.image_url %}
@@ -37,7 +37,7 @@
 
                             {% if forloop.counter|divisibleby:2 %}
                                 </div>
-                                <div class="row mb-2 p-3 ms-5 ps-5 mx-auto">
+                                <div class="row m-3 p-3 my-2 mx-auto">
                             {% endif %}
                         {% endfor %}
 
