@@ -18,7 +18,6 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ["https://voltsverse-polls.herokuapp.com.herokuapp.com"]
 
 # Application definition
 
@@ -26,6 +25,7 @@ INSTALLED_APPS = [
     # 3rd Party
     'crispy_forms',
     'crispy_bootstrap5',
+    'corsheaders',
     'dal',
     'dal_select2',
     'allauth',
@@ -58,9 +58,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'polls_project.urls'
+CSRF_TRUSTED_ORIGINS = ["https://voltsverse-polls.herokuapp.com"]
+CORS_ORIGIN_WHITELIST = (
+    'https://voltsverse-polls.herokuapp.com',
+)
 
 TEMPLATES = [
     {
