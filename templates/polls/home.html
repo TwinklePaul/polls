@@ -20,6 +20,15 @@
                     You are only allowed to vote once per poll, unless the poll has been altered.
                 </p>
             </div>
+
+            {% if messages %}
+                {% comment %} <ul class="messages"> {% endcomment %}
+                {% for message in messages %}
+                    <div  class="alert {% if message.tags %} alert-{{ message.tags }}  {% else %}alert-primary {% endif %}"> {{ message }} </div>
+                {% endfor %}
+                {% comment %} </ul> {% endcomment %}
+            {% endif %}
+
             <div class="row mt-5">
                 <div class="col-lg-10 mx-auto">
                     <div class="career-search mb-60">
@@ -60,3 +69,4 @@
     </div>
 </section>
 {% endblock content %}
+

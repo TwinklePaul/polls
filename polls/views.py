@@ -1,6 +1,7 @@
 from django.views.generic import ListView
 from django.views.generic.edit import ModelFormMixin
-from django.shortcuts import get_object_or_404
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from dal import autocomplete
 
@@ -53,8 +54,10 @@ class ChoicesListView(LoginRequiredMixin, ListView, ModelFormMixin):
 
         if self.form.is_valid():
             self.object = self.form.save(
-                choice=self.form.cleaned_data["choices"], poll=self.kwargs['pk'], user=self.request.user)
+                choice=self.form.cleaned_data["choices"], review=self.form.cleaned_data["review"], poll=self.kwargs['pk'], user=self.request.user)
+            messages.success(request, f'{self.object} noted')
             self.form = PollDetailForm(pk=self.kwargs['pk'])
+            return redirect('/polls/')
 
         return self.get(request, *args, **kwargs)
 

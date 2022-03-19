@@ -12,6 +12,7 @@ crispy-bootstrap5 = "*"
 fontawesomefree = "*"
 pillow = "*"
 django-autocomplete-light = "*"
+psycopg2 = "*"
 
 [dev-packages]
 

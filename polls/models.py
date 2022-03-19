@@ -21,6 +21,7 @@ class Poll(models.Model):
     )
     title = models.CharField(max_length=200)
     pub_date = models.DateTimeField(auto_now_add=True)
+    description = models.TextField(blank=True, null=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -28,39 +29,6 @@ class Poll(models.Model):
 
     def get_absolute_url(self):
         return reverse('poll', kwargs={'pk': str(self.pk)})
-
-    def user_can_vote(self, user):
-        """ 
-        Return False if user already voted
-        """
-        user_votes = user.vote_set.all()
-        qs = user_votes.filter(poll=self)
-        if qs.exists():
-            return False
-        return True
-
-    @property
-    def get_vote_count(self):
-        return self.vote_set.count()
-
-    def get_result_dict(self):
-        res = []
-        for choice in self.choice_set.all():
-            d = {}
-            alert_class = ['primary', 'secondary', 'success',
-                           'danger', 'dark', 'warning', 'info']
-
-            d['alert_class'] = secrets.choice(alert_class)
-            d['text'] = choice.option
-            d['num_votes'] = choice.get_vote_count
-            if not self.get_vote_count:
-                d['percentage'] = 0
-            else:
-                d['percentage'] = (choice.get_vote_count /
-                                   self.get_vote_count)*100
-
-            res.append(d)
-        return res
 
 
 class Choice(models.Model):
@@ -88,10 +56,6 @@ class Choice(models.Model):
             self.image_file.save(f"image_{self.pk}", File(img_temp))
         super(Choice, self).save(*args, **kwargs)
 
-    @property
-    def get_vote_count(self):
-        return self.vote_set.count()
-
 
 class Vote(models.Model):
     voter = models.ForeignKey(
@@ -109,10 +73,13 @@ class Vote(models.Model):
         on_delete=models.CASCADE
     )
 
+    review = models.TextField(blank=True, null=True)
+
     def __str__(self):
         return f"{self.voter}'s vote on '{self.poll}'"
 
     def save(self, *args, **kwargs):
         if self.choice.poll.id != self.poll.id:
-            raise ValueError("Please Select the Correct Value")
+            raise ValueError(
+                "Please select the correct Option for the selected Poll")
         super().save(*args, **kwargs)

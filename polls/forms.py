@@ -25,6 +25,9 @@ class PollDetailForm(forms.ModelForm):
                                 label=''
                                 )
 
+    review = forms.CharField(widget=forms.Textarea(
+        attrs={'placeholder': 'Your opininon is valuable to us.'}), required=False, )
+
     class Meta:
         model = Poll
         fields = ['choices', ]
@@ -38,8 +41,10 @@ class PollDetailForm(forms.ModelForm):
             widget=forms.RadioSelect,
             label=''
         )
+        self.fields['review'] = forms.CharField(widget=forms.Textarea(
+            attrs={'placeholder': 'Your opininon is valuable to us.'}), required=False, )
 
-    def save(self, commit=True, **kwargs):
+    def save(self, commit=True, review='', **kwargs):
         choice = kwargs["choice"]
         choice_obj = Choice.objects.filter(id=choice.id)
         choice_obj.update(count_vote=choice_obj[0].count_vote+1)
@@ -50,8 +55,11 @@ class PollDetailForm(forms.ModelForm):
             new_vote = Vote(
                 poll=Poll.objects.filter(id=kwargs['poll'])[0],
                 choice=choice_obj[0],
-                voter=kwargs['user'])
+                voter=kwargs['user'],
+                review=review)
             new_vote.save()
+
+            print("\n\n\n\n", new_vote)
             return new_vote
         raise DataError("You have already Voted")
 

@@ -10,20 +10,9 @@
         <div class="container ">
             <div class="heading_container heading_center">
                 <h2 class="mb-4">
-                    Poll Detail
+                    Cast your Vote!
                 </h2>
             </div>
-            {% comment %} {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                    <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    {% endfor %}
-                </div>
-            {% endif %} {% endcomment %}
             
             <h3 class="text-start mt-5 ms-5 ps-4 mb-3"> {{ poll.poll }} </h3>
                     
@@ -33,13 +22,13 @@
                         {% comment %} {{ form|crispy }} {% endcomment %}
                         <div class="row ms-5 p-3 ps-5 my-2 mx-auto">
                         {% for choice in poll.choices %}
-                            <div class="col-6 form-check text-start" style="height:25%"> 
+                            <div class="col-6 form-check text-start p-3"> 
                                 <input type="radio" class="form-check-input" name="choices" value={{choice.id}} id="id_choices_{{ forloop.counter }}" required=""> 
                                 <label for="id_choices_{{ forloop.counter }}" class="form-check-label"> 
                                     {% if choice.image_url %}
-                                        <img style="width:20%" src={{ choice.image_url }}/>
+                                        <img style="width:90%" src={{ choice.image_url }}/>
                                     {% elif choice.image_file %}
-                                        <img style="width:20%" src={{ choice.image_file.url }}/>
+                                        <img style="width:22rem; height:22rem;" src={{ choice.image_file.url }}/>
                                     {% else %}
                                         {{ choice }}
                                     {% endif %}
@@ -51,12 +40,22 @@
                                 <div class="row mb-2 p-3 ms-5 ps-5 mx-auto">
                             {% endif %}
                         {% endfor %}
+
+                        <div id="div_id_review" class="mb-3"> 
+                            <label for="id_review" class="form-label requiredField">
+                                Review
+                            </label> 
+                            <textarea name="review" cols="40" rows="10" class="textarea form-control" id="id_review"> </textarea> 
+                        </div>
                     </div>
                     <input type="submit" value="Vote" class="btn btn-primary mt-5">
                     <a class="btn btn-warning mt-5" href="{% url 'polls_list' %}" role="button">Cancel</a>
                 </form>
             </div>
-                
+
+            <h5 class="text-start mt-4 ms-5 ps-4 mb-2">
+                {{ poll.poll.description }}
+            </h5>
         </div>
     </div>
 </section>
