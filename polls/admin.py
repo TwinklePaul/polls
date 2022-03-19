@@ -9,11 +9,14 @@ from .forms import VotesForm
 # class PollsAdmin(admin.ModelAdmin):
 #     list_display = ('title', 'pub_date')
 
+class ChoicesAdmin(admin.ModelAdmin):
+    list_display = ('option', 'poll', 'count_vote')
+
 
 class VotesAdmin(admin.ModelAdmin):
     form = VotesForm
 
 
 admin.site.register(Poll)
-admin.site.register(Choice)
+admin.site.register(Choice, ChoicesAdmin)
 admin.site.register(Vote, VotesAdmin)

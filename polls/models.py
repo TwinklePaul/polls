@@ -45,6 +45,9 @@ class Choice(models.Model):
     image_url = models.URLField(blank=True, null=True)
     count_vote = models.IntegerField(default=0)
 
+    class Meta:
+        ordering = ("poll", "count_vote", "option")
+
     def __str__(self):
         return f"{self.option}"
 
@@ -74,6 +77,9 @@ class Vote(models.Model):
     )
 
     review = models.TextField(blank=True, null=True)
+
+    class Meta:
+        ordering = ("poll", "choice")
 
     def __str__(self):
         return f"{self.voter}'s vote on '{self.poll}'"
