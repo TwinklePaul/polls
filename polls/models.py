@@ -46,7 +46,7 @@ class Choice(models.Model):
     count_vote = models.IntegerField(default=0)
 
     class Meta:
-        ordering = ("poll", "count_vote", "option")
+        ordering = ("poll", "option", "count_vote")
 
     def __str__(self):
         return f"{self.option}"
