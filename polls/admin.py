@@ -10,7 +10,7 @@ from .forms import VotesForm
 #     list_display = ('title', 'pub_date')
 
 class ChoicesAdmin(admin.ModelAdmin):
-    list_display = ('option', 'poll', 'count_vote')
+    list_display = ('option', 'poll')
 
 
 class VotesAdmin(admin.ModelAdmin):
