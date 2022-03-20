@@ -14,48 +14,49 @@
                 </h2>
             </div>
             
-            <h3 class="text-start mt-5 mx-5 ps-4 mb-3"> {{ poll.poll }} </h3>
+            <h5 class="text-start mt-5 mx-5 ps-4 mb-3"> {{ poll.poll }} </h5>
                     
-            <div class="p-5 pt-2 justify-content-center">
-                <form class="text-start mx-2" action="" method="POST"> 
-                        {% csrf_token %} 
-                        {% comment %} {{ form|crispy }} {% endcomment %}
-                        <div class="row m-3 p-3 my-2 mx-auto">
-                        {% for choice in poll.choices %}
-                            <div class="col-lg-6 form-check text-start p-3"> 
-                                <input type="radio" class="form-check-input" name="choices" value={{choice.id}} id="id_choices_{{ forloop.counter }}" required=""> 
-                                <label for="id_choices_{{ forloop.counter }}" class="form-check-label"> 
-                                    {% if choice.image_url %}
-                                        <img style="width:22rem; height:22rem;" src={{ choice.image_url }}/>
-                                    {% elif choice.image_file %}
-                                        <img style="width:22rem; height:22rem;" src={{ choice.image_file.url }}/>
-                                    {% else %}
-                                        {{ choice }}
-                                    {% endif %}
-                                </label> 
-                            </div>
+            <form class="text-start" action="" method="POST"> 
+                <div class="row">
+                    {% csrf_token %} 
+                    {% comment %} {{ form|crispy }} {% endcomment %}
+                    {% for choice in poll.choices %}
+                    <div class="col-md-6 box">
+                        <input type="radio" class="form-check-input" name="choices" value={{choice.id}} id="id_choices_{{ forloop.counter }}" required=""> 
+                        <label for="id_choices_{{ forloop.counter }}" class="form-check-label"> 
+                            {% if choice.image_url %}
+                                <img style="width:22rem; height:22rem;" src={{ choice.image_url }}/>
+                            {% elif choice.image_file %}
+                                <img style="width:22rem; height:22rem;" src={{ choice.image_file.url }}/>
+                            {% else %}
+                                {{ choice }}
+                            {% endif %}
+                        </label> 
 
-                            {% if forloop.counter|divisibleby:2 %}
+                            {% comment %} {% if forloop.counter|divisibleby:2 %}
                                 </div>
                                 <div class="row m-3 p-3 my-2 mx-auto">
-                            {% endif %}
-                        {% endfor %}
-
-                        <div id="div_id_review" class="mb-3"> 
-                            <label for="id_review" class="form-label requiredField">
-                                Review
-                            </label> 
-                            <textarea name="review" cols="40" rows="10" class="textarea form-control" id="id_review"> </textarea> 
-                        </div>
+                            {% endif %} {% endcomment %}
+                        
                     </div>
-                    <input type="submit" value="Vote" class="btn btn-primary mt-5">
-                    <a class="btn btn-warning mt-5" href="{% url 'polls_list' %}" role="button">Cancel</a>
-                </form>
-            </div>
+                    {% endfor %}
 
-            <h5 class="text-start mt-4 ms-5 ps-4 mb-2">
+
+                    <div id="div_id_review" class="mb-3 mt-5 p-5"> 
+                        <label for="id_review" class="form-label requiredField">
+                            Review
+                        </label> 
+                        <textarea name="review" cols="20" rows="5" class="textarea form-control" id="id_review"> </textarea> 
+                    </div>
+                
+                <input type="submit" value="Vote" class="btn btn-primary mt-5">
+                <a class="btn btn-warning mt-5" href="{% url 'polls_list' %}" role="button">Cancel</a>
+                </div>
+            </form>
+
+            <p class="text-start mt-4 ms-5 ps-4 mb-2">
                 {{ poll.poll.description }}
-            </h5>
+            </p>
         </div>
     </div>
 </section>
