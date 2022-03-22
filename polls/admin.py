@@ -15,7 +15,7 @@ class ChoicesAdmin(admin.ModelAdmin):
 
 class VotesAdmin(admin.ModelAdmin):
     form = VotesForm
-    list_display = ('voter', 'option', 'poll')
+    list_display = ('voter', 'choice', 'poll')
 
 
 admin.site.register(Poll)
