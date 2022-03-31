@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+import dj_database_url
 import os
 
 
@@ -18,13 +19,13 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
     # 3rd Party
     'crispy_forms',
     'crispy_bootstrap5',
+    'corsheaders',
     'dal',
     'dal_select2',
     'allauth',
@@ -57,9 +58,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'polls_project.urls'
+CSRF_TRUSTED_ORIGINS = ["https://voltsverse-polls.herokuapp.com"]
+CORS_ORIGIN_WHITELIST = (
+    'https://voltsverse-polls.herokuapp.com',
+)
 
 TEMPLATES = [
     {
@@ -88,10 +94,18 @@ WSGI_APPLICATION = 'polls_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('POSTGRES_DB'),
+        'USER': config('POSTGRES_USER'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': 'db',
+        'PORT': 5432
     }
 }
+
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation

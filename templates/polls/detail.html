@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %}Polls List{% endblock title %} 
+{% block title %}VoltsVerse Vote{% endblock title %} 
 
 {% block content %}
 <section class="catagory_section layout_padding" style="min-height: 100vh;">
@@ -14,48 +14,51 @@
                 </h2>
             </div>
             
-            <h3 class="text-start mt-5 ms-5 ps-4 mb-3"> {{ poll.poll }} </h3>
-                    
-            <div class="p-5 pt-2 justify-content-center">
-                <form class="text-start ms-4" action="" method="POST"> 
-                        {% csrf_token %} 
-                        {% comment %} {{ form|crispy }} {% endcomment %}
-                        <div class="row ms-5 p-3 ps-5 my-2 mx-auto">
-                        {% for choice in poll.choices %}
-                            <div class="col-6 form-check text-start p-3"> 
-                                <input type="radio" class="form-check-input" name="choices" value={{choice.id}} id="id_choices_{{ forloop.counter }}" required=""> 
-                                <label for="id_choices_{{ forloop.counter }}" class="form-check-label"> 
-                                    {% if choice.image_url %}
-                                        <img style="width:22rem; height:22rem;" src={{ choice.image_url }}/>
-                                    {% elif choice.image_file %}
-                                        <img style="width:22rem; height:22rem;" src={{ choice.image_file.url }}/>
-                                    {% else %}
-                                        {{ choice }}
-                                    {% endif %}
-                                </label> 
-                            </div>
+            <h4 class="text-start mt-5 mx-5 ps-4 mb-3"> {{ poll.poll }} </h4>
 
-                            {% if forloop.counter|divisibleby:2 %}
-                                </div>
-                                <div class="row mb-2 p-3 ms-5 ps-5 mx-auto">
-                            {% endif %}
-                        {% endfor %}
-
-                        <div id="div_id_review" class="mb-3"> 
-                            <label for="id_review" class="form-label requiredField">
-                                Review
-                            </label> 
-                            <textarea name="review" cols="40" rows="10" class="textarea form-control" id="id_review"> </textarea> 
-                        </div>
-                    </div>
-                    <input type="submit" value="Vote" class="btn btn-primary mt-5">
-                    <a class="btn btn-warning mt-5" href="{% url 'polls_list' %}" role="button">Cancel</a>
-                </form>
-            </div>
-
-            <h5 class="text-start mt-4 ms-5 ps-4 mb-2">
+            <p class="text-start mt-4 ms-5 ps-4 mb-2">
                 {{ poll.poll.description }}
-            </h5>
+            </p>
+                    
+            <form class="text-start" action="" method="POST"> 
+                <div class="row">
+                    {% csrf_token %} 
+                    {% comment %} {{ form|crispy }} {% endcomment %}
+                    {% for choice in poll.choices %}
+                    <div class="col-md-6 box">
+                        <input type="radio" class="form-check-input" name="choices" value={{choice.id}} id="id_choices_{{ forloop.counter }}" required=""> 
+                        <label for="id_choices_{{ forloop.counter }}" class="form-check-label"> 
+                            {% if choice.image_url %}
+                                <img style="width:22rem; height:22rem;" src={{ choice.image_url }}/>
+                            {% elif choice.image_file %}
+                                <img style="width:22rem; height:22rem;" src={{ choice.image_file.url }}/>
+                            {% else %}
+                                <p class="p-3"><strong>{{ choice }}</strong></p>
+                            {% endif %}
+                        </label> 
+
+                            {% comment %} {% if forloop.counter|divisibleby:2 %}
+                                </div>
+                                <div class="row m-3 p-3 my-2 mx-auto">
+                            {% endif %} {% endcomment %}
+                        
+                    </div>
+                    {% endfor %}
+
+
+                    <div id="div_id_review" class="mb-3 mt-3 p-5"> 
+                        <label for="id_review" class="form-label requiredField">
+                            <h5>Review</h5>
+                        </label> 
+                        <textarea name="review" cols="20" rows="5" class="textarea form-control" placeholder="Please share your opinion. what could be better?" id="id_review"> </textarea> 
+                    </div>
+                
+                </div>
+                <div class="text-center">
+                    <input type="submit" value="Vote" class="btn btn-primary mt-2 mx-2 mb-3">
+                    <a class="btn btn-warning mt-2 mx-2 mb-3" href="{% url 'polls_list' %}" role="button">Cancel</a>
+                </div>
+            </form>
         </div>
     </div>
 </section>
